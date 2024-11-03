@@ -1,0 +1,7 @@
+dataset:
+  train:
+    sampler:
+      name: patch-sampler
+      num_patch: 4
+      patch_size: 32
+      ratio_mask: 1

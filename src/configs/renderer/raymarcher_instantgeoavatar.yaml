@@ -1,0 +1,12 @@
+model:
+  renderer:
+    name: renderer-instantgeoavatar
+    end_epoch: $div{${trainer.max_epochs},1.5}
+    max_samples_per_ray: 256
+    cos_freq: 8
+    max_samples_per_ray_test: 768
+    max_num_rays: 291600
+    occupancy_grid:
+      name: occupancy-grid
+      grid_size: 64
+      resolution: 64

@@ -1,0 +1,28 @@
+dataset:
+  name: peoplesnapshot
+  subject: male-4-casual
+  gender: male
+  dataroot: ../data/PeopleSnapshot/${dataset.subject}/
+  train:
+    num_workers: 8
+    batch_size: 4
+    start: 0
+    end: 659
+    skip: 6
+    downscale: 2
+    fitting: ${model.smpl.optimize_smpl}
+    refine: ${model.smpl.refine_smpl}
+  val:
+    num_workers: 4
+    batch_size: 1
+    start: 660
+    end: 660
+    skip: 6
+    downscale: 2
+  test:
+    num_workers: 4
+    batch_size: 1
+    start: 660
+    end: 872
+    skip: 6
+    downscale: 2

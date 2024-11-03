@@ -1,0 +1,108 @@
+defaults:
+  - ./configs/model/geometry_instantgeoavatar.yaml
+  - ./configs/model/texture.yaml
+  - ./configs/renderer/raymarcher_instantgeoavatar.yaml
+  - ./configs/deformer/fast_snarf.yaml
+  - ./configs/sampler/sampler_patch.yaml
+  - ./configs/dataset/${dataset_name}/${subject_name}.yaml
+
+name: InstantGeoAvatar_${dataset_name}
+project_name: InstantGeoAvatar
+experiment_name: base
+tag: ''
+seed: 42
+resume: true
+
+dataset_name: peoplesnapshot
+subject_name: male-4-casual
+trial_name: ${subject_name}
+
+model:
+  name: instantgeoavatar
+  ray_chunk: 1024
+  learned_background: false
+  background_color: random
+  cos_anneal_end: 1000
+  smpl:
+    optimize_smpl: false
+    refine_smpl: false
+
+checkpoint:
+  save_top_k: 1
+  every_n_epochs: 1
+
+export:
+  chunk_size: 2097152
+  export_vertex_color: true
+  export_every: 1
+
+system:
+  name: instantgeoavatar-system
+  loss:
+    name: instantgeoavatar-loss
+    lambda_rgb: 10.0
+    lambda_reg: 0.1
+    lambda_density: 0.2
+    lambda_depth_reg: 0.01
+    lambda_mask: 0.1
+    lambda_eikonal: 0.01
+    lambda_flat_surface: 1.1
+    lambda_lpips: 0.1
+    lambda_beta_penalty: 0.
+  optimizer:
+    params:
+      geometry_encoding:
+        lr: ${system.optimizer.args.lr}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      hybrid_encoding:
+        lr: ${system.optimizer.args.lr}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      geometry_network:
+        lr: ${system.optimizer.args.lr}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      texture:
+        lr: ${system.optimizer.args.lr}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      renderer:
+        lr: ${system.optimizer.args.lr}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      smpl_embedding:
+        lr: ${div:${system.optimizer.args.lr},10.}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      density:
+        lr: ${div:${system.optimizer.args.lr},10.}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      non_rigid_motion:
+        lr: ${div:${system.optimizer.args.lr},2.}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      non_rigid_motion_deformed:
+        lr: ${div:${system.optimizer.args.lr},2.}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      pose_corrector:
+        lr: ${div:${system.optimizer.args.lr},2.}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      latents:
+        lr: ${div:${system.optimizer.args.lr},1.}
+        weight_decay: ${system.optimizer.args.weight_decay}
+      delta_weights_predictor:
+        lr: ${div:${system.optimizer.args.lr},2.}
+        weight_decay: ${system.optimizer.args.weight_decay}
+    name: Adam
+    args:
+      lr: 1e-2
+      # lr: 2e-2
+      betas: [0.9, 0.99]
+      eps: 1.e-15
+      weight_decay: 0.
+  scheduler:
+    name: LambdaLR
+    interval: epoch
+    args:
+      expression: "(1 - x / ${trainer.max_epochs}) ** 1.75"
+
+trainer:
+  max_epochs: 30
+  check_val_every_n_epoch: 10
+  log_every_n_steps: 50
+  enable_progress_bar: true
+  precision: 32

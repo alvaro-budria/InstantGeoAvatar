@@ -1,0 +1,25 @@
+dataset:
+  name: x-humans
+  subject: '00028'
+  gender: male
+  dataroot: ../data/XHumans/${dataset.subject}/
+  canonical_pose: ${model.deformer.canonical_pose}
+  train:
+    num_workers: 8
+    batch_size: 1
+    downscale: 2
+    canonical_pose: ${dataset.canonical_pose}
+    gender: ${dataset.gender}
+  val:
+    num_workers: 8
+    batch_size: 1
+    downscale: 2
+    canonical_pose: ${dataset.canonical_pose}
+    gender: ${dataset.gender}
+  test:
+    num_workers: 8
+    batch_size: 1
+    downscale: 2
+    skip: 30
+    canonical_pose: ${dataset.canonical_pose}
+    gender: ${dataset.gender}

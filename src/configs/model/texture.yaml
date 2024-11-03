@@ -1,0 +1,10 @@
+model:
+  texture:
+    name: volume-color
+    input_feature_dim: ${model.geometry.feature_dim}
+    mlp_network_config:
+      otype: FullyFusedMLP
+      activation: ReLU
+      output_activation: Sigmoid
+      n_neurons: 64
+      n_hidden_layers: 2

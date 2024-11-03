@@ -1,0 +1,9 @@
+model:
+  deformer:
+    name: fast-snarf
+    model_path: ../data/SMPLX/smpl
+    gender: ${dataset.gender}
+    softmax_mode: hierarchical
+    resolution: 64
+    canonical_pose: "A_pose"
+    precision: ${trainer.precision}

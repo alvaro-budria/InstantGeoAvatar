@@ -1,0 +1,28 @@
+dataset:
+  name: peoplesnapshot
+  subject: female-3-casual
+  gender: female
+  dataroot: ../data/PeopleSnapshot/${dataset.subject}/
+  train:
+    num_workers: 8
+    batch_size: 1
+    start: 0
+    end: 445
+    skip: 4
+    downscale: 2
+    fitting: ${model.smpl.optimize_smpl}
+    refine: ${model.smpl.refine_smpl}
+  val:
+    num_workers: 8
+    batch_size: 1
+    start: 446
+    end: 446
+    skip: 4
+    downscale: 2
+  test:
+    num_workers: 8
+    batch_size: 1
+    start: 446
+    end: 647
+    skip: 4
+    downscale: 2
