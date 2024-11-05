@@ -5,6 +5,11 @@
 
 Code release for the ACCV 2024 paper [_InstantGeoAvatar: Effective Geometry and Appearance Modeling of Animatable Avatars from Monocular Video_](https://arxiv.org/abs/2411.01512).
 
+<p align="center">
+<img src="./media/training_progression.gif" width="182" height="294">
+<img src="./media/ablation.gif" width="406" height="294">
+</p>
+
 ## Installation
 To install the necessary dependencies, we recommend taking the following steps (as PyTorch3D and tinycudann can be problematic):
 
@@ -100,7 +105,6 @@ python launch.py --config configs/demo_instantgeoavatar_xhumans.yaml --from_pret
 ```
 
 
-
 ## Inference
 
 To perform inference on a new set of body poses, you can run the following command, making sure the dataset and subject in the configuration `.yaml` file match that of the checkpoint path.
@@ -115,11 +119,13 @@ python launch.py --config configs/demo_instantgeoavatar_xhumans.yaml --test --re
 
 Find the generated results at `../exp/InstantGeoAvatar_<dataset>/<subject>/save/test/`.
 
-
+<p align="center">
+<img src="./media/comparison.gif" width="280" height="480">
+</p>
 
 ## Experimenting on custom video
 
-We refer to the instructions [here](https://github.com/tijiang13/InstantAvatar/tree/master?tab=readme-ov-file#play-with-your-own-video) on how to obtain segmentation masks, SMPL parameters and camera parameters needed to train InstantGeoAvatar.
+We refer to the instructions [here](https://github.com/tijiang13/InstantAvatar/tree/master?tab=readme-ov-file#play-with-your-own-video) on how to obtain segmentation masks, SMPL parameters and camera parameters needed to train InstantGeoAvatar on custom data.
 
 
 
