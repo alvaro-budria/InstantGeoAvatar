@@ -1,6 +1,9 @@
 # InstantGeoAvatar
 
-Code release for the ACCV 2024 paper [_InstantGeoAvatar: Effective Geometry and Appearance Modeling of Animatable Avatars from Monocular Video_]().
+## [Paper](https://arxiv.org/abs/2411.01512) | [Supplementary](https://drive.google.com/drive/folders/1m0CcazcfuKzU2ApajeG6Kx89R9q5tKJ0?usp=sharing) | [Presentation](https://docs.google.com/presentation/d/1W1xcLV3FLnGnLffZ_BTvNskKg-86yssilq7yl_ouoU8/edit?usp=sharing)
+
+
+Code release for the ACCV 2024 paper [_InstantGeoAvatar: Effective Geometry and Appearance Modeling of Animatable Avatars from Monocular Video_](https://arxiv.org/abs/2411.01512).
 
 ## Installation
 To install the necessary dependencies, we recommend taking the following steps (as PyTorch3D and tinycudann can be problematic):
